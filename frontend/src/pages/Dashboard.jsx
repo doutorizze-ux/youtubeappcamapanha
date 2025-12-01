@@ -42,6 +42,18 @@ function Dashboard({ setIsAuthenticated }) {
         }
     };
 
+    const handleDelete = async (id) => {
+        if (window.confirm('Tem certeza que deseja excluir esta campanha?')) {
+            try {
+                await campaignAPI.delete(id);
+                loadCampaigns();
+            } catch (error) {
+                console.error('Error deleting campaign:', error);
+                alert('Erro ao excluir campanha');
+            }
+        }
+    };
+
     const filteredCampaigns = campaigns.filter(c => {
         if (filter === 'all') return true;
         if (filter === 'achieved') return c.status === 'achieved';
@@ -82,7 +94,6 @@ function Dashboard({ setIsAuthenticated }) {
                     <div className="navbar-content">
                         <div className="navbar-brand">
                             <img src="/logo.png" alt="Logo" className="navbar-logo" />
-                            <h2>Campaign Validator</h2>
                         </div>
                         <div className="navbar-menu">
                             <span className="user-info">👤 {user.name}</span>
@@ -280,6 +291,13 @@ function Dashboard({ setIsAuthenticated }) {
                                                             onClick={() => handleValidate(campaign.id)}
                                                         >
                                                             🔄 Validar
+                                                        </button>
+                                                        <button
+                                                            className="btn btn-sm btn-danger"
+                                                            onClick={() => handleDelete(campaign.id)}
+                                                            style={{ background: '#ff4d4f', color: 'white', border: 'none' }}
+                                                        >
+                                                            🗑️ Excluir
                                                         </button>
                                                     </div>
                                                 </td>

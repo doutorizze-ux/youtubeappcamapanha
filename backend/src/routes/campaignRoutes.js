@@ -8,5 +8,6 @@ router.post('/', campaignController.createCampaign);
 router.get('/', campaignController.getCampaigns);
 router.get('/:id', campaignController.getCampaignById);
 router.post('/:id/validate', campaignController.manualValidate);
+router.delete('/:id', campaignController.deleteCampaign);
 
 module.exports = router;

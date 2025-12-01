@@ -59,3 +59,23 @@ exports.manualValidate = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+exports.deleteCampaign = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Delete validation history first (foreign key constraint)
+        await prisma.validationHistory.deleteMany({
+            where: { campaignId: parseInt(id) }
+        });
+
+        // Delete campaign
+        await prisma.campaign.delete({
+            where: { id: parseInt(id) }
+        });
+
+        res.json({ message: 'Campaign deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

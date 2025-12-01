@@ -37,6 +37,7 @@ function Login({ setIsAuthenticated }) {
                 });
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
+                console.log('Login successful, navigating to dashboard...');
                 setIsAuthenticated(true);
                 navigate('/dashboard');
             }

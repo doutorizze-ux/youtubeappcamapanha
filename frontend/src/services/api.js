@@ -25,6 +25,7 @@ export const campaignAPI = {
     getById: (id) => api.get(`/campaigns/${id}`),
     create: (data) => api.post('/campaigns', data),
     validate: (id) => api.post(`/campaigns/${id}/validate`),
+    delete: (id) => api.delete(`/campaigns/${id}`),
 };
 
 export default api;
